@@ -6,5 +6,5 @@ addons:
 services:
   - docker
 script:
-  . docker-compose run app npm test
+  - docker-compose run app npm test
   - sonar-scanner
