@@ -1,5 +1,10 @@
 language: minimal
 sudo: required
+addons:
+  sonarcloud:
+    organization: "hack23"
 services:
   - docker
-script: docker-compose run app npm test
+script:
+  . docker-compose run app npm test
+  - sonar-scanner
