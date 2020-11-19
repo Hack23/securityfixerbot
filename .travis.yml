@@ -1,11 +1,20 @@
 dist: focal
 language: minimal
 sudo: required
+install: true
+before_install:
+  - sudo apt-get install -y ca-certificates-java ca-certificates wget openjdk-11-jdk-headless npm
 addons:
   sonarcloud:
     organization: "hack23"
+  apt:
+    update: true    
+env:
+  global:
+    - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 services:
   - docker
 script:
-  - docker-compose run app npm test
+  - npm install
+  - npm test
   - sonar-scanner
