@@ -16,7 +16,6 @@ module.exports = {
     ],
     'no-throw-literal': 'off',
     '@typescript-eslint/no-object-literal-type-assertion': 'off',
-    '@typescript-eslint/interface-name-prefix': ['warn', 'always'],
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',

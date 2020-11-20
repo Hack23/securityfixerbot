@@ -17,6 +17,8 @@
     "build": "tsc",
     "start": "probot run ./lib/index.js",
     "test": "jest --forceExit --detectOpenHandles --coverage",
+    "lint": "eslint './src/**/*.{tsx,ts}'",
+    "lint-fix": "eslint './src/**/*.{tsx,ts}' --fix",
     "audit-dependencies": "audit-ci --config audit-ci.json"
   },
   "jestSonar": {
