@@ -16,6 +16,7 @@ services:
   - docker
 script:
   - npm install
-  - npm test
   - npm run audit-dependencies
+  - npm run test
+  - npm run lint
   - sonar-scanner
