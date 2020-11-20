@@ -2,7 +2,7 @@
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) that Security bot that will create PR with fixes
 
-[![license](https://img.shields.io/github/license/Hack23/cia.svg)](https://raw.githubusercontent.com/Hack23/cia/master/citizen-intelligence-agency/LICENSE.txt)
+[![license](https://img.shields.io/github/license/Hack23/securityfixerbot.svg)](https://raw.githubusercontent.com/Hack23/securityfixerbot/master/LICENSE)
 [![CLA assistant](https://cla-assistant.io/readme/badge/Hack23/securityfixerbot)](https://cla-assistant.io/Hack23/securityfixerbot)
 [![Build Status](https://travis-ci.org/Hack23/securityfixerbot.svg?branch=master)](https://travis-ci.org/Hack23/securityfixerbot)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=securityfixerbot&metric=ncloc)](https://sonarcloud.io/dashboard?id=securityfixerbot)
