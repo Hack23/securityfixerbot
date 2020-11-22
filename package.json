@@ -27,7 +27,7 @@
     "indent": 4
   },
   "dependencies": {
-    "probot": "10.17.1",
+    "probot": "10.17.2",
     "test": "0.6.0"
   },
   "devDependencies": {
