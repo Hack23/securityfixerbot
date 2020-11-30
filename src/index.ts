@@ -2,7 +2,7 @@ import { Application } from "probot"; // eslint-disable-line no-unused-vars
 import { onPush } from "./on-push";
 
 export = (app: Application) => {
-	app.on("push", onPush);
+	app.on('push', onPush);
 	console.log("SECURITYFIXERBOT STARTED")
 	
 	// For more information on building apps:

@@ -1,6 +1,5 @@
 import webhooks from "@octokit/webhooks"
-import * as probot from "probot"
-import { ProbotOctokit } from "probot"
+import { Context , ProbotOctokit } from "probot"
 
 interface PushState {
 	readonly author: string
@@ -14,7 +13,7 @@ interface PushState {
 }
 
 /** called when this bot gets notified about a push on Github */
-export async function onPush(context: probot.Context<webhooks.EventPayloads.WebhookPayloadPush>): Promise<void> {
+export async function onPush(context: Context<webhooks.EventPayloads.WebhookPayloadPush>): Promise<void> {
 	let state: PushState | undefined
 	try {
 		state = {
@@ -31,21 +30,22 @@ export async function onPush(context: probot.Context<webhooks.EventPayloads.Webh
 
 		// ignore deleted branches
 		if (state.commitSha === "0000000") {
-			console.log(`${repoPrefix}: IGNORING BRANCH DELETION`)
+			console.log(`IGNORING BRANCH DELETION : ${repoPrefix}`)
 			return
 		}
-
-		// log push detected
-		console.log(`${repoPrefix}: PUSH DETECTED`)
 
 		// ignore commits by Securityfixer
 		if (state.author === "securityfixer[bot]") {
-			console.log(`${repoPrefix}: IGNORING COMMIT BY Securityfixerbot`)
+			console.log(`IGNORING COMMIT BY Securityfixerbot : ${repoPrefix}`)
 			return
 		}
+		
+		// log push detected
+		console.log(`PUSH DETECTED : ${repoPrefix}`)
+
 	}
 	catch (e) {
-		console.log(`ON PUSH:`, e)
+		console.log(`FAILURE ON PUSH:${context.payload}`, e)
 		return
 	}
 

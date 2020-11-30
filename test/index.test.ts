@@ -1,13 +1,17 @@
 // import index from '../src/index'
 
 import nock from 'nock'
+
 // Requiring our app implementation
 import myProbotApp from '../src'
 import { Probot, ProbotOctokit } from 'probot'
 // Requiring our fixtures
-import pushpayload from './fixtures/push.json'
-import pushdeletionpayload from './fixtures/branch-deletion-push.json'
-import pushsecuritybotpayload from './fixtures/security-bot-push.json'
+//const issuesOpenedPayload = require('./fixtures/issues.opened.json');
+
+const emptypayload = require('./fixtures/empty.json');
+const pushpayload = require('./fixtures/push.json');
+const pushdeletionpayload = require('./fixtures/branch-deletion-push.json');
+const pushsecuritybotpayload = require('./fixtures/security-bot-push.json');
 
 const fs = require('fs')
 const path = require('path')
@@ -22,6 +26,7 @@ describe('My Probot app', () => {
 		probot = new Probot({
 			id: 123,
 			privateKey,
+			githubToken: "test",
 			// disable request throttling and retries for testing
 			Octokit: ProbotOctokit.defaults({
 				retry: { enabled: false },
@@ -34,23 +39,31 @@ describe('My Probot app', () => {
 
 	test('onpush branch deletion do nothing', async () => {
 		const mock = nock('https://api.github.com')
-		await probot.receive({ name: 'push', pushdeletionpayload })
+		await probot.receive({ name: 'push',  payload: pushdeletionpayload })
 		expect(mock.pendingMocks()).toStrictEqual([])
 	});
 
 	test('onpush securityfixerbot author do nothing', async () => {
 		const mock = nock('https://api.github.com')
 
-		await probot.receive({ name: 'push', pushsecuritybotpayload })
+		await probot.receive({ name: 'push',  payload: pushsecuritybotpayload })
 		expect(mock.pendingMocks()).toStrictEqual([])
 	});
 
 	test('onpush check code if PR should be created', async () => {
 		const mock = nock('https://api.github.com')
 
-		await probot.receive({ name: 'push', pushpayload })
+		await probot.receive({ name: 'push',  payload: pushpayload })
 		expect(mock.pendingMocks()).toStrictEqual([])
 	});
+	
+	test('onpush failure', async () => {
+		const mock = nock('https://api.github.com')
+
+		await probot.receive({ name: 'push',  payload: emptypayload })
+		expect(mock.pendingMocks()).toStrictEqual([])
+	});
+	
 
 	afterEach(() => {
 		nock.cleanAll()
