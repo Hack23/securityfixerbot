@@ -1,74 +1,69 @@
 // import index from '../src/index'
 
-import nock from 'nock'
+import nock from "nock";
 
 // Requiring our app implementation
-import myProbotApp from '../src'
-import { Probot, ProbotOctokit } from 'probot'
+import myProbotApp from "../src";
+import { Probot, ProbotOctokit } from "probot";
 // Requiring our fixtures
-//const issuesOpenedPayload = require('./fixtures/issues.opened.json');
 
-const emptypayload = require('./fixtures/empty.json');
-const pushpayload = require('./fixtures/push.json');
-const pushdeletionpayload = require('./fixtures/branch-deletion-push.json');
-const pushsecuritybotpayload = require('./fixtures/security-bot-push.json');
+import emptypayload from "./fixtures/empty.json";
+import pushpayload from "./fixtures/push.json";
+import pushdeletionpayload from "./fixtures/branch-deletion-push.json";
+import pushsecuritybotpayload from "./fixtures/security-bot-push.json";
 
-const fs = require('fs')
-const path = require('path')
+import fs = require("fs");
+import path = require("path");
 
-const privateKey = fs.readFileSync(path.join(__dirname, 'fixtures/mock-cert.pem'), 'utf-8')
+const privateKey = fs.readFileSync(
+  path.join(__dirname, "fixtures/mock-cert.pem"),
+  "utf-8"
+);
 
-describe('My Probot app', () => {
-	let probot: any
+describe("My Probot app", () => {
+  let probot: any;
+  const mock = nock("https://api.github.com");
 
-	beforeEach(() => {
-		nock.disableNetConnect()
-		probot = new Probot({
-			id: 123,
-			privateKey,
-			githubToken: "test",
-			// disable request throttling and retries for testing
-			Octokit: ProbotOctokit.defaults({
-				retry: { enabled: false },
-				throttle: { enabled: false },
-			})
-		})
-		// Load our app into probot
-		probot.load(myProbotApp)
-	});
+  beforeEach(() => {
+    nock.disableNetConnect();
+    probot = new Probot({
+      id: 123,
+      privateKey,
+      githubToken: "test",
+      // disable request throttling and retries for testing
+      Octokit: ProbotOctokit.defaults({
+        retry: { enabled: false },
+        throttle: { enabled: false },
+      }),
+    });
+    // Load our app into probot
+    probot.load(myProbotApp);
+  });
 
-	test('onpush branch deletion do nothing', async () => {
-		const mock = nock('https://api.github.com')
-		await probot.receive({ name: 'push',  payload: pushdeletionpayload })
-		expect(mock.pendingMocks()).toStrictEqual([])
-	});
+  test("onpush branch deletion do nothing", async () => {
+    await probot.receive({ name: "push", payload: pushdeletionpayload });
+    expect(mock.pendingMocks()).toStrictEqual([]);
+  });
 
-	test('onpush securityfixerbot author do nothing', async () => {
-		const mock = nock('https://api.github.com')
+  test("onpush securityfixerbot author do nothing", async () => {
+    await probot.receive({ name: "push", payload: pushsecuritybotpayload });
+    expect(mock.pendingMocks()).toStrictEqual([]);
+  });
 
-		await probot.receive({ name: 'push',  payload: pushsecuritybotpayload })
-		expect(mock.pendingMocks()).toStrictEqual([])
-	});
+  test("onpush check code if PR should be created", async () => {
+    await probot.receive({ name: "push", payload: pushpayload });
+    expect(mock.pendingMocks()).toStrictEqual([]);
+  });
 
-	test('onpush check code if PR should be created', async () => {
-		const mock = nock('https://api.github.com')
+  test("onpush failure", async () => {
+    await probot.receive({ name: "push", payload: emptypayload });
+    expect(mock.pendingMocks()).toStrictEqual([]);
+  });
 
-		await probot.receive({ name: 'push',  payload: pushpayload })
-		expect(mock.pendingMocks()).toStrictEqual([])
-	});
-	
-	test('onpush failure', async () => {
-		const mock = nock('https://api.github.com')
-
-		await probot.receive({ name: 'push',  payload: emptypayload })
-		expect(mock.pendingMocks()).toStrictEqual([])
-	});
-	
-
-	afterEach(() => {
-		nock.cleanAll()
-		nock.enableNetConnect()
-	});
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
 });
 
 // For more information about testing with Jest see:

@@ -17,8 +17,8 @@
     "build": "tsc",
     "start": "probot run ./lib/index.js",
     "test": "jest --forceExit --detectOpenHandles --coverage",
-    "lint": "eslint './src/**/*.{tsx,ts}'  -f json -o eslint-report.json",
-    "lint-fix": "eslint './src/**/*.{tsx,ts}' --fix",
+    "lint": "eslint './{src,test}t/**/*.{tsx,ts}'  -f json -o eslint-report.json",
+    "lint-fix": "eslint './{src,test}/**/*.{tsx,ts}' --fix",
     "audit-dependencies": "audit-ci --config audit-ci.json",
     "check-updates": "ncu"
   },
