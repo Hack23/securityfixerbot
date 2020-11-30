@@ -20,6 +20,7 @@
     "lint": "eslint './{src,test}t/**/*.{tsx,ts}'  -f json -o eslint-report.json",
     "lint-fix": "eslint './{src,test}/**/*.{tsx,ts}' --fix",
     "audit-dependencies": "audit-ci --config audit-ci.json",
+    "audit-licenses" : "npx license-checker --summary",
     "check-updates": "ncu"
   },
   "jestSonar": {

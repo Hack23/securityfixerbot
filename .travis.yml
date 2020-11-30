@@ -17,6 +17,7 @@ services:
 script:
   - npm install
   - npm run audit-dependencies
+  - npm run audit-licenses
   - npm run test
   - npm run lint
   - sonar-scanner
