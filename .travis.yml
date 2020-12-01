@@ -4,7 +4,7 @@ sudo: required
 install: true
 before_install:
   - sudo apt-get install -y ca-certificates-java ca-certificates wget openjdk-11-jdk-headless npm
-  - sudo npm install license-compatibility-checker -g
+#  - sudo npm install license-compatibility-checker -g
 addons:
   sonarcloud:
     organization: "hack23"
@@ -19,7 +19,7 @@ script:
   - npm install
   - npm run audit-dependencies
   - npm run audit-licenses
-  - npm run license-check || true
+#  - npm run license-check || true
   - npm run test
   - npm run lint
   - sonar-scanner
