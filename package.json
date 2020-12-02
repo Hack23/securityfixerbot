@@ -30,7 +30,7 @@
     "indent": 4
   },
   "dependencies": {
-    "@octokit/rest": "18.0.9",
+    "@octokit/rest": "18.0.10",
     "probot": "10.17.2",
     "test": "0.6.0"
   },
