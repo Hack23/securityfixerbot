@@ -6,3 +6,5 @@ npm-debug.log
 coverage
 lib
 eslint-report.json
+bom.xml
+bom.json

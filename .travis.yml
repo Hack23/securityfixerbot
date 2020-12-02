@@ -4,7 +4,8 @@ sudo: required
 install: true
 before_install:
   - sudo apt-get install -y ca-certificates-java ca-certificates wget openjdk-11-jdk-headless npm
-#  - sudo npm install license-compatibility-checker -g
+#  - sudo npm install -g @appthreat/cdxgen
+#  - sudo npm install -g license-compatibility-checker
 addons:
   sonarcloud:
     organization: "hack23"
