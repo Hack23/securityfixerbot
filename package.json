@@ -36,7 +36,7 @@
     "test": "0.6.0"
   },
   "devDependencies": {
-    "@appthreat/cdxgen": "^2.0.20",
+    "@appthreat/cdxgen": "2.0.20",
     "@types/jest": "26.0.16",
     "@types/node": "14.14.10",
     "@typescript-eslint/eslint-plugin": "4.9.0",
