@@ -26,6 +26,7 @@ import emptypayload from "./fixtures/empty.json";
 import pushpayload from "./fixtures/push.json";
 import pushdeletionpayload from "./fixtures/branch-deletion-push.json";
 import pushsecuritybotpayload from "./fixtures/security-bot-push.json";
+import getcontentresponse from "./fixtures/getcontents.json";
 
 import fs = require("fs");
 import path = require("path");
@@ -66,6 +67,10 @@ describe("My Probot app", () => {
   });
 
   test("onpush check code if PR should be created", async () => {
+    nock("https://api.github.com")
+      .get("/repos/Codertocat/Hello-World/contents/?ref=refs/tags/simple-tag")
+      .reply(200, getcontentresponse);
+
     await probot.receive({ name: "push", payload: pushpayload });
     expect(mock.pendingMocks()).toStrictEqual([]);
   });

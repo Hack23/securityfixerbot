@@ -21,6 +21,7 @@ import { Context, ProbotOctokit } from "probot";
 interface PushState {
   readonly author: string;
   readonly branch: string;
+  readonly ref: string;
   readonly commitSha: string;
   readonly octokit: InstanceType<typeof ProbotOctokit>;
   readonly org: string;
@@ -37,6 +38,7 @@ export async function onPush(
     state = {
       author: context.payload.pusher.name,
       branch: context.payload.ref.replace("refs/heads/", ""),
+      ref: context.payload.ref,
       commitSha: context.payload.after.substring(0, 7),
       octokit: context.github,
       org: context.payload.repository.owner.login,
@@ -55,8 +57,18 @@ export async function onPush(
       console.log(`IGNORING COMMIT BY Securityfixerbot : ${repoPrefix}`);
       return;
     }
-
     console.log(`PUSH DETECTED : ${repoPrefix}`);
+
+    const content = await context.octokit.repos.getContent({
+      owner: state.org,
+      path: "",
+      ref: state.ref,
+      repo: state.repo,
+    });
+
+    console.log(`CONTENT : ${content}`);
+
+    //CHECK CONTENT
   } catch (e) {
     console.log(`FAILURE ON PUSH:${context.payload}`, e);
     return;
