@@ -1,6 +1,8 @@
 # securityfixerbot
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that Security bot that will create PR with fixes
+> A GitHub App built with [Probot](https://github.com/probot/probot) that Security bot that will create PR with fixes. 
+
+> More bots examples at <https://probot.github.io/apps/> and <https://github.com/googleapis/repo-automation-bots>
 
 [![license](https://img.shields.io/github/license/Hack23/securityfixerbot.svg)](https://raw.githubusercontent.com/Hack23/securityfixerbot/master/LICENSE)
 [![CLA assistant](https://cla-assistant.io/readme/badge/Hack23/securityfixerbot)](https://cla-assistant.io/Hack23/securityfixerbot)
