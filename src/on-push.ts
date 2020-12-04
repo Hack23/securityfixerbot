@@ -16,6 +16,8 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 import webhooks from "@octokit/webhooks";
+import { ReposGetContentResponseData } from "@octokit/types";
+
 import { Context, ProbotOctokit } from "probot";
 
 interface PushState {
@@ -59,16 +61,24 @@ export async function onPush(
     }
     console.log(`PUSH DETECTED : ${repoPrefix}`);
 
-    const content = await context.octokit.repos.getContent({
-      owner: state.org,
-      path: "",
-      ref: state.ref,
-      repo: state.repo,
-    });
+    try {
+      const content = await context.octokit.repos.getContent({
+        owner: state.org,
+        path: "",
+        ref: state.ref,
+        repo: state.repo,
+      });
 
-    console.log(`CONTENT : ${content}`);
+      const existingRootContent: ReposGetContentResponseData[] = (content.data as unknown) as ReposGetContentResponseData[];
 
-    //CHECK CONTENT
+      //CHECK CONTENT
+      console.log(`ROOT CONTENT : ${repoPrefix}:  ${existingRootContent}`);
+      existingRootContent.forEach((file) =>
+        console.log(file.type + ":" + file.path)
+      );
+    } catch (e) {
+      console.log(`FAILURE ON GETTING REPO CONTENT:${repoPrefix}`, e);
+    }
   } catch (e) {
     console.log(`FAILURE ON PUSH:${context.payload}`, e);
     return;
