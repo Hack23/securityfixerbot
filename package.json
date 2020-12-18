@@ -21,7 +21,7 @@
     "lint-fix": "eslint './{src,test}/**/*.{tsx,ts}' --fix",
     "audit-dependencies": "audit-ci --config audit-ci.json",
     "audit-licenses": "npx license-checker --summary",
-    "license-check": " license-compatibility-checker",
+    "license-check": "license-compatibility-checker",
     "gen-cdx": "cdxgen -o bom.xml",
     "check-updates": "ncu"
   },
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@octokit/rest": "18.0.12",
-    "probot": "10.19.0",
+    "probot": "11.0.1",
     "test": "0.6.0"
   },
   "devDependencies": {
