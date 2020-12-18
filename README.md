@@ -4,6 +4,8 @@
 
 > More bots examples at <https://probot.github.io/apps/> and <https://github.com/googleapis/repo-automation-bots>
 
+> Status : POC
+
 [![license](https://img.shields.io/github/license/Hack23/securityfixerbot.svg)](https://raw.githubusercontent.com/Hack23/securityfixerbot/master/LICENSE)
 [![CLA assistant](https://cla-assistant.io/readme/badge/Hack23/securityfixerbot)](https://cla-assistant.io/Hack23/securityfixerbot)
 [![Build Status](https://travis-ci.org/Hack23/securityfixerbot.svg?branch=master)](https://travis-ci.org/Hack23/securityfixerbot)
