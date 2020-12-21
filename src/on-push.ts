@@ -42,7 +42,7 @@ export async function onPush(
       branch: context.payload.ref.replace("refs/heads/", ""),
       ref: context.payload.ref,
       commitSha: context.payload.after.substring(0, 7),
-      octokit: context.github,
+      octokit: context.octokit,
       org: context.payload.repository.owner.login,
       pullRequestId: "",
       pullRequestNumber: 0,
