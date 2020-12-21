@@ -15,10 +15,11 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
-import { Application } from "probot"; // eslint-disable-line no-unused-vars
+import { Probot } from "probot";
+
 import { onPush } from "./on-push";
 
-export = (app: Application) => {
+export = (app: Probot) => {
   app.on("push", onPush);
   console.log("SECURITYFIXERBOT STARTED");
 
