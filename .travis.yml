@@ -22,5 +22,5 @@ script:
   - npm run audit-licenses
 #  - npm run license-check || true
   - npm clean-install-test
-  - npm run lint
+#  - npm run lint
   - sonar-scanner
