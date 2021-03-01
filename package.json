@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@octokit/rest": "18.3.1",
-    "probot": "11.0.6",
+    "probot": "11.1.0",
     "test": "0.6.0"
   },
   "devDependencies": {
